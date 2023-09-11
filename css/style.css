@@ -2,26 +2,26 @@
   padding: 0;
   margin: 0;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-  flex-direction: column;
-  
+  flex-direction: column;  
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: center;  
   margin-top: 30px;
 }
 
-label, input {
-  display: block;
+h1{
+  margin-bottom: 30px;
+}
+
+label, input {  
   margin-bottom: 10px;
 }
 
 form {
-  text-align: start;
-  padding: 30px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+ display: flex;
+ flex-direction: column;
 }
