@@ -36,12 +36,12 @@ form.addEventListener('submit', function(event) {
   const password = passwordInput.value;
 
   if (!isPasswordValid(password)) {
-    alert('A senha deve ter pelo menos 8 caracteres e conter pelo menos uma letra.');
+    displayMessageAndReset('A senha deve ter pelo menos 8 caracteres e conter pelo menos uma letra.');
     return;
   }
 
   if (doesNameExist(name)) {
-    alert('Este nome já existe na lista!');
+    displayMessageAndReset('Este nome já existe na lista!');
     return;
   }
 
@@ -49,5 +49,5 @@ form.addEventListener('submit', function(event) {
 
   localStorage.setItem('people', JSON.stringify(people));
 
-  alert('Dados do formulário armazenados no localStorage:');
+  displayMessageAndReset('Dados do formulário armazenados no localStorage:');
 });
