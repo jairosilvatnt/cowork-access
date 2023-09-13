@@ -11,13 +11,32 @@ function isPasswordValid(password) {
   return /^(?=.*[A-Za-z]).{8,}$/.test(password);
 }
 
+
 function isValidCPF(cpf) {
   // Verifica se o CPF tem 11 dígitos
   if (cpf.length !== 11) {
-    return false;
+    return false;    
   }
   return true;
 }
+// Expressões regulares para CPF's
+cpfInput.addEventListener("blur", function(){
+  cpfInput.value = cpfInput.value.match(/.{1,3}/g).join(".").replace(/\.(?=[^.]*$)/,"-");
+});
+
+
+//Expressões regulares para numeros de telefones
+const regex = /^\(\d{2}\)\s\d{5}-\d{4}$/;
+
+phoneInput.addEventListener('input', function (){
+  const phoneNumber = phoneInput.value;
+
+  if(regex.test(phoneNumber)){
+    alert('Número de telefone válido:', phoneNumber);
+  }else{
+    alert('Número de telefone inválido:', phoneNumber);
+  }
+});
 
 function isValidEmail(email) {  
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;

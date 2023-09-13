@@ -1,0 +1,32 @@
+Para aplicar a função regex em um campo de entrada HTML usando JavaScript, você pode seguir os passos a seguir. Suponha que você tenha o seguinte campo de entrada em seu HTML:
+
+```html
+<input type="text" id="phone" name="phone">
+```
+
+Aqui está um exemplo de como você pode aplicar a função regex para validar um número de telefone no campo `phone` usando JavaScript:
+
+```javascript
+// Obtém o elemento de entrada do telefone
+const phoneInput = document.getElementById('phone');
+
+// Define a expressão regular para um número de telefone no formato (99) 9999-9999
+const regex = /^\(\d{2}\)\s\d{4}-\d{4}$/;
+
+// Adiciona um ouvinte de evento para verificar a entrada quando o usuário digitar algo
+phoneInput.addEventListener('input', function () {
+  // Obtém o valor do campo de entrada
+  const phoneNumber = phoneInput.value;
+
+  // Testa se o valor do campo corresponde à expressão regular
+  if (regex.test(phoneNumber)) {
+    // O número de telefone é válido
+    console.log('Número de telefone válido:', phoneNumber);
+  } else {
+    // O número de telefone é inválido
+    console.log('Número de telefone inválido:', phoneNumber);
+  }
+});
+```
+
+Neste exemplo, usamos a expressão regular `^\(\d{2}\)\s\d{4}-\d{4}$` para validar um número de telefone no formato (99) 9999-9999. Você pode ajustar a expressão regular de acordo com o formato de número de telefone que deseja validar. O evento `input` é usado para verificar a entrada à medida que o usuário digita no campo `phone` e exibe mensagens no console com base na validade do número de telefone.
