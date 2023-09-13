@@ -50,14 +50,14 @@ function maskcpf(v) {
   return v;
 }
 
-function maskcnpj(v) {
-  v = v.replace(/\D/g, "");
-  v = v.replace(/^(\d{2})(\d)/, "$1.$2");
-  v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
-  v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
-  v = v.replace(/(\d{4})(\d)/, "$1-$2");
-  return v;
-}
+// function maskcnpj(v) {
+//   v = v.replace(/\D/g, "");
+//   v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+//   v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+//   v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+//   v = v.replace(/(\d{4})(\d)/, "$1-$2");
+//   return v;
+// }
 
 
 function idcss(el) {
@@ -99,8 +99,6 @@ window.onload = function () {
   //-------------
 
 }
-
-
 
 //Expressões regulares para numeros de telefones
 // const regex = /^\(\d{2}\)\s\d{5}-\d{4}$/;
@@ -178,5 +176,8 @@ form.addEventListener('submit', function (event) {
 
   alert('Dados do formulário armazenados no localStorage:');
   form.reset();
+  
+  // Redireciona o usuário para a tela principal após o cadastro
+  window.location.href = '/layouts/auth.html';
 });
 
