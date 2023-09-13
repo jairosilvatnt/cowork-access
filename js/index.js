@@ -13,32 +13,109 @@ function isPasswordValid(password) {
 
 
 function isValidCPF(cpf) {
-  // Verifica se o CPF tem 11 dígitos
-  if (cpf.length !== 11) {
-    return false;    
+  // Verifica se o CPF tem 14 dígitos
+  if (cpf.length !== 14) {
+    return false;
   }
   return true;
 }
 // Expressões regulares para CPF's
-cpfInput.addEventListener("blur", function(){
-  cpfInput.value = cpfInput.value.match(/.{1,3}/g).join(".").replace(/\.(?=[^.]*$)/,"-");
-});
+// cpfInput.addEventListener("blur", function () {
+//   cpfInput.value = cpfInput.value.match(/.{1,3}/g).join(".").replace(/\.(?=[^.]*$)/, "-");
+// });
+
+
+function mask(o, f) {
+  v_obj = o
+  v_fun = f
+  setTimeout("execmask()", 1)
+}
+
+function execmask() {
+  v_obj.value = v_fun(v_obj.value)
+}
+
+function masktel(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+  v = v.replace(/(\d)(\d{4})$/, "$1-$2");
+  return v;
+}
+
+function maskcpf(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  return v;
+}
+
+function maskcnpj(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+  v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+  v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+  v = v.replace(/(\d{4})(\d)/, "$1-$2");
+  return v;
+}
+
+
+function idcss(el) {
+  return document.getElementById(el);
+}
+
+window.onload = function () {
+
+
+  //TEL FIXO -------
+  // idcss('phone').setAttribute('maxlength', 14);
+  // idcss('phone').onkeypress = function () {
+  //   mask(this, masktel);
+  // }
+  //-------------
+
+
+  //CELULAR -------
+  idcss('phone').setAttribute('maxlength', 15);
+  idcss('phone').onkeypress = function () {
+    mask(this, masktel);
+  }
+  //-------------
+
+
+  //CPF ---------
+  idcss('cpf').setAttribute('maxlength', 14);
+  idcss('cpf').onkeypress = function () {
+    mask(this, maskcpf);
+  }
+  //-------------
+
+
+  //CNPJ --------
+  // idcss('cnpj').setAttribute('maxlength', 18);
+  // idcss('cnpj').onkeypress = function () {
+  //   mask(this, maskcnpj);
+  // }
+  //-------------
+
+}
+
 
 
 //Expressões regulares para numeros de telefones
-const regex = /^\(\d{2}\)\s\d{5}-\d{4}$/;
+// const regex = /^\(\d{2}\)\s\d{5}-\d{4}$/;
 
-phoneInput.addEventListener('input', function (){
-  const phoneNumber = phoneInput.value;
+// phoneInput.addEventListener('input', function (){
+//   const phoneNumber = phoneInput.value;
 
-  if(regex.test(phoneNumber)){
-    alert('Número de telefone válido:', phoneNumber);
-  }else{
-    alert('Número de telefone inválido:', phoneNumber);
-  }
-});
+//   if(regex.test(phoneNumber)){
+//     alert('Número de telefone válido:', phoneNumber);
+//   }else{
+//     alert('Número de telefone inválido:', phoneNumber);
+//   }
+// });
 
-function isValidEmail(email) {  
+function isValidEmail(email) {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return emailRegex.test(email);
 }
@@ -59,6 +136,7 @@ function doesCPFExist(cpf) {
 function alert(message) {
   console.log(message);
 }
+
 
 form.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -88,16 +166,16 @@ form.addEventListener('submit', function (event) {
     alert('Este CPF já está cadastrado!');
     return;
   }
-  
+
   if (!isValidEmail(email)) {
     alert('Por favor, insira um endereço de email válido.');
     return;
   }
-  
+
   addPerson(name, cpf, phone, email, password);
-  
+
   localStorage.setItem('people', JSON.stringify(people));
-  
+
   alert('Dados do formulário armazenados no localStorage:');
   form.reset();
 });
