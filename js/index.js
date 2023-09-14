@@ -176,8 +176,8 @@ form.addEventListener('submit', function (event) {
 
   alert('Dados do formulário armazenados no localStorage:');
   form.reset();
-  
+
   // Redireciona o usuário para a tela principal após o cadastro
-  window.location.href = '/layouts/auth.html';
+  window.location.href = 'auth.html';
 });
 

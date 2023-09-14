@@ -1,32 +1,37 @@
-Para aplicar a função regex em um campo de entrada HTML usando JavaScript, você pode seguir os passos a seguir. Suponha que você tenha o seguinte campo de entrada em seu HTML:
+<h1>Tela de Login</h1>
+<form id="login-form">
+  <label>E-mail:</label>
+  <input type="text" id="email" placeholder="Email" required>
+  <label>Senha:</label>
+  <input type="password" id="password" placeholder="Senha" required>
+  <input onclick="" value="Logar">
+  <a href="signup.html">Cadastrar</a>
+</form>
 
-```html
-<input type="text" id="phone" name="phone">
-```
+<script>
+  const loginForm = document.getElementById('login-form');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
 
-Aqui está um exemplo de como você pode aplicar a função regex para validar um número de telefone no campo `phone` usando JavaScript:
+  // Função para verificar se o usuário está cadastrado
+  function checkUserLogin() {
+    const enteredEmail = emailInput.value;
+    const enteredPassword = passwordInput.value;
 
-```javascript
-// Obtém o elemento de entrada do telefone
-const phoneInput = document.getElementById('phone');
+    // Recupere os dados do usuário do localStorage (ou de onde quer que estejam)
+    const storedUser = JSON.parse(localStorage.getItem('user'));
 
-// Define a expressão regular para um número de telefone no formato (99) 9999-9999
-const regex = /^\(\d{2}\)\s\d{4}-\d{4}$/;
-
-// Adiciona um ouvinte de evento para verificar a entrada quando o usuário digitar algo
-phoneInput.addEventListener('input', function () {
-  // Obtém o valor do campo de entrada
-  const phoneNumber = phoneInput.value;
-
-  // Testa se o valor do campo corresponde à expressão regular
-  if (regex.test(phoneNumber)) {
-    // O número de telefone é válido
-    console.log('Número de telefone válido:', phoneNumber);
-  } else {
-    // O número de telefone é inválido
-    console.log('Número de telefone inválido:', phoneNumber);
+    if (storedUser && enteredEmail === storedUser.email && enteredPassword === storedUser.password) {
+      alert('Login bem-sucedido! Redirecionando para a área restrita...');
+      // Redirecione para a página de ambiente após o login bem-sucedido
+      window.location.href = 'ambiente.html';
+    } else {
+      alert('Credenciais incorretas. Tente novamente.');
+    }
   }
-});
-```
 
-Neste exemplo, usamos a expressão regular `^\(\d{2}\)\s\d{4}-\d{4}$` para validar um número de telefone no formato (99) 9999-9999. Você pode ajustar a expressão regular de acordo com o formato de número de telefone que deseja validar. O evento `input` é usado para verificar a entrada à medida que o usuário digita no campo `phone` e exibe mensagens no console com base na validade do número de telefone.
+  loginForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    checkUserLogin(); // Chame a função de verificação ao enviar o formulário
+  });
+</script>
