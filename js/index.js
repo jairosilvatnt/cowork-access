@@ -131,8 +131,8 @@ function doesCPFExist(cpf) {
   return people.some(person => person.cpf === cpf);
 }
 
-function alert(message) {
-  console.log(message);
+function mensagens(message) {
+  alert(message);
 }
 
 
@@ -146,27 +146,27 @@ form.addEventListener('submit', function (event) {
   const password = passwordInput.value;
 
   if (!isPasswordValid(password)) {
-    alert('A senha deve ter pelo menos 8 caracteres e conter pelo menos uma letra.');
+    mensagens('A senha deve ter pelo menos 8 caracteres e conter pelo menos uma letra.');
     return;
   }
 
   if (doesNameExist(name)) {
-    alert('Este nome já existe na lista!');
+    mensagens('Este nome já existe na lista!');
     return;
   }
 
   if (!isValidCPF(cpf)) {
-    alert('CPF inválido ou em formato incorreto.');
+    mensagens('CPF inválido ou em formato incorreto.');
     return;
   }
 
   if (doesCPFExist(cpf)) {
-    alert('Este CPF já está cadastrado!');
+    mensagens('Este CPF já está cadastrado!');
     return;
   }
 
   if (!isValidEmail(email)) {
-    alert('Por favor, insira um endereço de email válido.');
+    mensagens('Por favor, insira um endereço de email válido.');
     return;
   }
 
@@ -174,7 +174,7 @@ form.addEventListener('submit', function (event) {
 
   localStorage.setItem('people', JSON.stringify(people));
 
-  alert('Dados do formulário armazenados no localStorage:');
+  mensagens('Dados do formulário armazenados no localStorage:');
   form.reset();
 
   // Redireciona o usuário para a tela principal após o cadastro
