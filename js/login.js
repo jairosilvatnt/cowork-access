@@ -32,7 +32,7 @@ loginForm.addEventListener('submit', function(event){
 
     localStorage.setItem('login', JSON.stringify(login));
 
-    window.location.href='ambiente.html';
+    window.location.href='environment.html';
   }else{
     alert('Senha incorreta!');
   }
